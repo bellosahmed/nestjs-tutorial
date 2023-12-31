@@ -37,5 +37,7 @@ model Bookmark {
   userId Int
   user   User @relation(fields: [userId], references: [id])
 
+  // onDelete: Cascade when user is deleted the data will be deleted as well
+
   @@map("bookmarks")
 }
