@@ -1,1 +1,1 @@
-import * from './edituser.dto';
+export * from './edituser.dto';

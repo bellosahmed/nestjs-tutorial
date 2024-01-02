@@ -2,7 +2,7 @@ import { Body, Controller, Get, Patch, UseGuards } from '@nestjs/common';
 import { User } from '@prisma/client';     
 import { Getuser } from './../auth/decorator/index';
 import { JwtGuard } from './../auth/guard/index';
-import { EditUserDto } from './dto/edituser.dto';
+import { EditUserDto } from './dto/index';
 import { UserService } from './user.service';
 
 @Controller('user')
@@ -15,12 +15,13 @@ export class UserController {
         return user;
     };
 
-    @Patch('edit')
-      editUser(
-        @Getuser('id') userId: number,
-        @Body() dto: EditUserDto,
-      ) {
-        return this.userService.editUser(userId, dto);
-      }
+@Patch('edit')
+@UseGuards(JwtGuard)
+editUser(
+  @Getuser() user: User,
+  @Body() dto: EditUserDto,
+) {
+  return this.userService.editUser(user.id, dto);
+}
     }
   

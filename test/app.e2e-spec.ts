@@ -3,8 +3,8 @@ import { AppModule } from './../src/app.module';
 import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { PrismaService } from './../src/prisma/prisma.service';
 import * as pactum from 'pactum';
-import { AuthDto } from '../src/auth/dto/auth.dto';
-import { EditUserDto } from '../src/user/dto/edituser.dto';
+import { AuthDto } from '../src/auth/dto/index';
+import { EditUserDto } from '../src/user/dto/index';
 
 describe('App e2e', () => {
   let app: INestApplication;
@@ -131,6 +131,7 @@ describe('App e2e', () => {
           ).withHeaders({
             Authorization: 'Bearer $S{userAt}'
           })
+          //.inspect()
           .expectStatus(200);  
       });
      });
@@ -138,8 +139,8 @@ describe('App e2e', () => {
      describe('Edit user', () => {
       it('should edit user', () => {
         const dto: EditUserDto = {
-          firstName: 'Bello',
-          email: 'bello@d.com',
+          firstName: "Bello",
+          email: "bello@d.com",
         };
         return pactum
           .spec()
